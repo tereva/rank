@@ -4,12 +4,28 @@
   <strong>Web:</strong>
   <%= @site.web %>
 </p>
-<p>
-  <strong>Requetes :</strong>
+
+<h2>Requètes actuelles :</h2>
 <ul>
-<%= render @requete %>
+<% @site.registres.each do |registre| %>
+  <li>
+    <span><%= registre.requete.nom %></span>
+    <span><%= link_to "delete", registre, method: :delete, confirm: "You sure?" %></span>
+  </li>
+<% end %>
 </ul>
-</p>
+
+<h2>Ajouter une requète :</h2>
+<%= form_for([@site, @site.registres.build]) do |f| %>
+  <p>
+  <%= f.collection_select(:requete_id, Requete.all, :id, :nom) %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+
 
 <%= link_to 'Edit', edit_site_path(@site) %> |
 <%= link_to 'Back', sites_path %>
