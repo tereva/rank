@@ -1,9 +1,15 @@
 class RegistresController < ApplicationController
 
+	before_action :authorize
+	
 	def create
 		@site = Site.find(params[:site_id])
-		@registre = @site.registres.create(registre_params)	
-        redirect_to site_path(@site), notice: 'Requete ajoutée.'
+		@registre = @site.registres.new(registre_params)	
+		if @registre.save
+        	redirect_to site_path(@site), notice: 'Requete ajoutée.'
+        else
+           redirect_to site_path(@site), notice: 'Requete existante.'
+        end
 	end
 
     def destroy

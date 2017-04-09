@@ -1,27 +1,20 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Requetes</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="row">
+  <div class="col-md-4">
+  <table class="table">
     <% @requetes.each do |requete| %>
       <tr>
         <td><%= requete.nom %></td>
-        <td><%= link_to 'Show', requete %></td>
-        <td><%= link_to 'Edit', edit_requete_path(requete) %></td>
-        <td><%= link_to 'Destroy', requete, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+        <%= link_to 'Edit', edit_requete_path(requete), class: "btn btn-xs btn-default"  %>
+        <%= link_to 'Destroy', requete, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-xs btn-default"%>
+        </td>
       </tr>
     <% end %>
-  </tbody>
 </table>
+</div>
+</div>
 
-<br>
 
-<%= link_to 'New Requete', new_requete_path %>

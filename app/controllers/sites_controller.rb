@@ -1,6 +1,7 @@
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
-
+  before_action :authorize
+  
   # GET /sites
   # GET /sites.json
   def index
@@ -26,16 +27,11 @@ class SitesController < ApplicationController
   # POST /sites.json
   def create
     @site = Site.new(site_params)
-
-    respond_to do |format|
       if @site.save
-        format.html { redirect_to @site, notice: 'Site was successfully created.' }
-        format.json { render :show, status: :created, location: @site }
+        redirect_to home_path, notice: 'Nouveau site crée' 
       else
-        format.html { render :new }
-        format.json { render json: @site.errors, status: :unprocessable_entity }
+        redirect_to home_path, notice: 'Erreur à la création du site' 
       end
-    end
   end
 
   # PATCH/PUT /sites/1

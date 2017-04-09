@@ -1,5 +1,7 @@
 class RequetesController < ApplicationController
+  
   before_action :set_requete, only: [:show, :edit, :update, :destroy]
+  before_action :authorize
 
   # GET /requetes
   # GET /requetes.json

@@ -1,31 +1,31 @@
 <p id="notice"><%= notice %></p>
+<h1><%= @site.web %></h1>
+<h3>Requêtes actuelles :</h3>
+<div class="row">
+  <div class="col-md-2">
+    <table class="table">
 
-<p>
-  <strong>Web:</strong>
-  <%= @site.web %>
-</p>
+      <% @site.registres.each do |registre| %>
+      <tr>
+        <td><%= registre.requete.nom %></td>
+        <td><%= link_to "delete", registre, method: :delete, confirm: "You sure?", class: "btn btn-xs btn-danger"  %></td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
 
-<h2>Requètes actuelles :</h2>
-<ul>
-<% @site.registres.each do |registre| %>
-  <li>
-    <span><%= registre.requete.nom %></span>
-    <span><%= link_to "delete", registre, method: :delete, confirm: "You sure?" %></span>
-  </li>
-<% end %>
-</ul>
-
-<h2>Ajouter une requète :</h2>
-<%= form_for([@site, @site.registres.build]) do |f| %>
-  <p>
-  <%= f.collection_select(:requete_id, Requete.all, :id, :nom) %>
-  </p>
-  <p>
-    <%= f.submit %>
-  </p>
-<% end %>
-
-
-
-<%= link_to 'Edit', edit_site_path(@site) %> |
-<%= link_to 'Back', sites_path %>
+<h3>Ajouter une requête :</h3>
+<div class="row">
+  <div class="col-md-2">
+    <%= form_for([@site, @site.registres.build]) do |f| %>
+    <p>
+      <%= f.collection_select(:requete_id, Requete.all, :id, :nom, {:include_blank => true}, {:class =>"form-control"}) %>
+    </p>
+    <p>
+      <%= f.submit 'Ajouter', :class => "btn btn-sm btn-primary"  %>
+    </p>
+    <% end %>
+  </div>
+</div>
+</div>
